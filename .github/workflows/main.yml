@@ -1,0 +1,32 @@
+name: Daily Proxy Rules Merge
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天午夜运行
+
+jobs:
+  merge_rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Merge Proxy Rules and Save to File
+        run: python merge_proxy_rules.py
+
+      - name: Commit and push merged rules file
+        run: |
+          git config --global user.name 'luyao'
+          git config --global user.email 'l767475207@gmail.com'
+          git add merged_rules.txt
+          git commit -m 'Update merged proxy rules'
+          git push
