@@ -1,2 +1,2 @@
 DOMAIN-SUFFIX, bing.com
-DOMAIN-SUFFIX, oaistatic.com
+
